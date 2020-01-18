@@ -10,6 +10,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import com.consistent.models.rate.Content;
+import com.consistent.models.rate.Contents;
 import com.consistent.models.rate.Medialink;
 import com.consistent.models.rate.Medialinks;
 import com.consistent.models.rate.Multimedia;
@@ -25,39 +27,59 @@ public class Main {
 	static List<String> listType = new ArrayList<>();
 	static List<String> listKeyword = new ArrayList<>();
 	static List<String> listUrl = new ArrayList<>();
+	static List<String> listType_en = new ArrayList<>();
+	static List<String> listKeyword_en = new ArrayList<>();
+	static List<String> listUrl_en = new ArrayList<>();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			JAXBContext context = JAXBContext.newInstance(Rates.class);
+			JAXBContext context = JAXBContext.newInstance(Contents.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			Rates rates = (Rates) unmarshaller.unmarshal(new File("/Users/bernardohernandez/Downloads/rate.xml"));
-			Rates rates_en = (Rates) unmarshaller.unmarshal(new File("/Users/bernardohernandez/Downloads/rate.xml"));
-			
-			if(rates.getRate() != null && !rates.getRate().isEmpty()){
-				for (Rate rate : rates.getRate()) {
-					getDataRate.put("code", rate.getCode());
-					getDataRate.put("", rate.getBenefits());
-					getDataRate.put("", rate.getChannel());
-					getDataRate.put("", rate.getCurrency());
-					getDataRate.put("", rate.getGuid());
-					getDataRate.put("", rate.getLanguage());
-					getDataRate.put("", rate.getName());
-					getDataRate.put("", rate.getOrder());
-					getDataRate.put("", rate.getTitle());
-					getDataRate.put("", rate.getKeyword());
-					getDataRate.put("", rate.getShortDescription());
-					if (rate.getMedialinks() != null && !rate.getMedialinks().isEmpty()) {
-						for(Medialinks medialinks: rate.getMedialinks()){
-							if(medialinks.getMedialinks() != null && !medialinks.getMedialinks().isEmpty()){
-								for(Medialink medialink : medialinks.getMedialinks()){
-									listType.add(medialink.getType());
-									listKeyword.add(medialink.getKeyword());
-									getDataRateList.put("type", listType);
-									getDataRateList.put("keyword", listKeyword);
-									if(medialink.getMultimedia() != null && !medialinks.getMedialinks().isEmpty()){
-										for(Multimedia multimedia : medialink.getMultimedia()){
-											listUrl.add(multimedia.getUrl());
-											getDataRateList.put("url", listUrl);	
+			String _rate = "/Users/bernardohernandez/Downloads/ratesenglsih.xml";
+			//String _rateTwo = "";
+			System.out.println("antes");
+			if(_rate!= null && !_rate.equals("")){
+				Contents contents = (Contents) unmarshaller.unmarshal(new File(_rate));
+				
+				if(contents != null){
+					for (Content content : contents.getContents()) {
+						System.out.println(contents.getContents().size());
+					}
+				}
+				
+				
+				
+				/*if(rates.getRate().size()>0){
+					if(rates.getRate() != null && !rates.getRate().isEmpty()){
+						for (Rate rate : rates.getRate()) {
+							getDataRate.put("code", rate.getCode());
+							getDataRate.put("benefits", rate.getBenefits());
+							getDataRate.put("channel", rate.getChannel());
+							getDataRate.put("currency", rate.getCurrency());
+							getDataRate.put("guid", rate.getGuid());
+							getDataRate.put("language", rate.getLanguage());
+							getDataRate.put("name", rate.getName());
+							getDataRate.put("order", rate.getOrder());
+							getDataRate.put("title", rate.getTitle());
+							getDataRate.put("keyword", rate.getKeyword());
+							getDataRate.put("shortDescription", rate.getShortDescription());
+							getDataRate.put("description", rate.getDescription());
+							getDataRate.put("restrictions", rate.getRestrictions());
+							getDataRate.put("end", rate.getEnd());
+							if (rate.getMedialinks() != null && !rate.getMedialinks().isEmpty()) {
+								for(Medialinks medialinks: rate.getMedialinks()){
+									if(medialinks.getMedialinks() != null && !medialinks.getMedialinks().isEmpty()){
+										for(Medialink medialink : medialinks.getMedialinks()){
+											listType.add(medialink.getType());
+											listKeyword.add(medialink.getKeyword());
+											getDataRateList.put("type", listType);
+											getDataRateList.put("keyword", listKeyword);
+											if(medialink.getMultimedia() != null && !medialinks.getMedialinks().isEmpty()){
+												for(Multimedia multimedia : medialink.getMultimedia()){
+													listUrl.add(multimedia.getUrl());
+													getDataRateList.put("url", listUrl);	
+												}
+											}
 										}
 									}
 								}
@@ -65,12 +87,52 @@ public class Main {
 						}
 					}
 				}
+				
+				
+				
+			}*/
+			
+			/*if(_rateTwo != null && !_rateTwo.equals("")){
+				Rates rates_en = (Rates) unmarshaller.unmarshal(new File(_rateTwo));
+				
+				if(!rates_en.getRate().isEmpty() && rates_en.getRate() != null && rates_en.getRate().size() > 0){
+					for (Rate rate : rates_en.getRate()) {
+						getDataRate.put("code_en", rate.getCode());
+						getDataRate.put("benefits_en", rate.getBenefits());
+						getDataRate.put("channel_en", rate.getChannel());
+						getDataRate.put("currency_en", rate.getCurrency());
+						getDataRate.put("guid_en", rate.getGuid());
+						getDataRate.put("language_en", rate.getLanguage());
+						getDataRate.put("name_en", rate.getName());
+						getDataRate.put("order_en", rate.getOrder());
+						getDataRate.put("title_en", rate.getTitle());
+						getDataRate.put("keyword_en", rate.getKeyword());
+						getDataRate.put("shortDescription_en", rate.getShortDescription());
+						getDataRate.put("description_en", rate.getDescription());
+						getDataRate.put("restrictions_en", rate.getRestrictions());
+						getDataRate.put("end_en", rate.getEnd());
+						if (rate.getMedialinks() != null && !rate.getMedialinks().isEmpty()) {
+							for(Medialinks medialinks: rate.getMedialinks()){
+								if(medialinks.getMedialinks() != null && !medialinks.getMedialinks().isEmpty()){
+									for(Medialink medialink : medialinks.getMedialinks()){
+										listType_en.add(medialink.getType());
+										listKeyword_en.add(medialink.getKeyword());
+										getDataRateList.put("type_en", listType_en);
+										getDataRateList.put("keyword_en", listKeyword_en);
+										if(medialink.getMultimedia() != null && !medialinks.getMedialinks().isEmpty()){
+											for(Multimedia multimedia : medialink.getMultimedia()){
+												listUrl_en.add(multimedia.getUrl());
+												getDataRateList.put("url_en", listUrl_en);	
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}*/
 			}
-			
-			System.out.println(getDataRateList.get("type"));
-			System.out.println(getDataRateList.get("keyword"));
-			System.out.println(getDataRateList.get("url"));
-			
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +144,8 @@ public class Main {
 	
 	
 	
-	public String getRate(){
+	
+	public static String getRate(){
 com.consistent.rate.MappingString mappingString = new MappingString();
 		
 		String rate = mappingString.DynamicHeader(
@@ -91,27 +154,27 @@ com.consistent.rate.MappingString mappingString = new MappingString();
 										mappingString.getDynamicContent("", "")
 										)+
 								mappingString.DynamicElement("codeRate", "text", "keyword",
-										mappingString.getDynamicContent("", "")
+										mappingString.getDynamicContent(getDataRate.get("code"),getDataRate.get("code_en"))
 										)+
 								mappingString.DynamicElement("nameRate", "text", "keyword", 
-										mappingString.getDynamicContent("", "")
+										mappingString.getDynamicContent(getDataRate.get("name"), getDataRate.get("name_en"))
 										)+
 								mappingString.DynamicElement("keywordRate", "text", "keyword", 
-										mappingString.getDynamicContent("", "")
+										mappingString.getDynamicContent(getDataRate.get("keyword"), getDataRate.get("keyword_en"))
 										)+
 								mappingString.DynamicElement("descriptionRate", "selection_break", "keyword", 
 										mappingString.DynamicElement("descriptionLongRate", "text_area", "text",
-												mappingString.getDynamicContent("", "")
+												mappingString.getDynamicContent(getDataRate.get("description"), getDataRate.get("description"))
 												)+
 										mappingString.DynamicElement("shortDescriptionRate", "text_area", "text", 
-												mappingString.getDynamicContent("", "")
+												mappingString.getDynamicContent(getDataRate.get("shortDescription"), getDataRate.get("shortDescription_en"))
 												)
 										)+
 								mappingString.DynamicElement("benefitsRate", "text_area", "text", 
-										mappingString.getDynamicContent("", "")
+										mappingString.getDynamicContent(getDataRate.get("benefits"), getDataRate.get("benefits_en"))
 										)+
 								mappingString.DynamicElement("Restrictions1", "text_area", "text", 
-										mappingString.getDynamicContent("", "")
+										mappingString.getDynamicContent(getDataRate.get("restrictions"), getDataRate.get("restrictions_en"))
 										)+
 								mappingString.DynamicElement("occupationRate", "selection_break", "keyword", 
 										mappingString.DynamicElement("rateOnlyIncludesRoomForSingleAndDoubleOccupancy", "boolean", "keyword", 
@@ -361,7 +424,7 @@ com.consistent.rate.MappingString mappingString = new MappingString();
 										mappingString.getDynamicContent("", "")
 										)+
 								mappingString.DynamicElement("currencyRate", "list", "keyword", 
-										mappingString.getDynamicContent("", "")
+										mappingString.getDynamicContent(getDataRate.get("currency"), getDataRate.get("currency_en"))
 										)+
 								mappingString.DynamicElement("mediaLinksRate", "selection_break", "keyword", 
 										mappingString.DynamicElement("mediaLinkRate", "document_library", "keyword", 
@@ -380,7 +443,7 @@ com.consistent.rate.MappingString mappingString = new MappingString();
 												mappingString.getDynamicContent("", "")
 												)+
 										mappingString.DynamicElement("finalDateBooking", "ddm-date", "keyword", 
-												mappingString.getDynamicContent("", "")
+												mappingString.getDynamicContent(getDataRate.get("end"), getDataRate.get("end_en"))
 												)
 										)+
 								mappingString.DynamicElement("travelDateRate", "selection_break", "keyword", 

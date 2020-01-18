@@ -13,13 +13,23 @@ public class Rate {
 	String title;
 	String language;
 	String keyword;
+	String description;
 	String shortDescription;
 	String order;
 	String channel;
 	String benefits;
 	String restrictions;
 	String currency;
+	String end;
 	List<Medialinks> medialinks;
+	
+	@XmlElement(name="end")
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
+	}
 	
 	@XmlElement(name="guid")
 	public String getGuid() {
@@ -62,6 +72,13 @@ public class Rate {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	@XmlElement(name = "description")
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	@XmlElement(name = "shortDescription")
 	public String getShortDescription() {
@@ -115,7 +132,7 @@ public class Rate {
 	
 	public Rate(String guid, String code, String name, String title, String language, String keyword,
 			String shortDescription, String order, String channel, String benefits, String restrictions,
-			String currency, List<Medialinks> medialinks) {
+			String currency, List<Medialinks> medialinks, String description, String end) {
 		super();
 		this.guid = guid;
 		this.code = code;
@@ -130,6 +147,8 @@ public class Rate {
 		this.restrictions = restrictions;
 		this.currency = currency;
 		this.medialinks = medialinks;
+		this.description = description;
+		this.end = end;
 	}
 	
 	public Rate(){
@@ -145,6 +164,8 @@ public class Rate {
 		this.benefits = "";
 		this.restrictions = "";
 		this.currency = "";
+		this.description = "";
+		this.end = "";
 	}
 
 }
